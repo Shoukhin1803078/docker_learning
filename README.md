@@ -4,20 +4,23 @@ MySelf Steps:
 
 Step-1 (Image Building): 
 
-1. Docker Images check korlam: `docker images`
-2. Dockerfile likhe Image build korbo (Image banano):  `docker build -t <name> .` 
+    - 1. Docker Images check korlam: 
+        - `docker images`
+    - 2. Dockerfile likhe Image build korbo (Image banano):  
+        - `docker build -t <name> .` 
 
 Step-2 (Container build from image):
 
-1. Build kora image Run korbo (Container banano) : 
-    - `docker run <image>`  ,
-    - or `docker run -it <image> bash`
-    - or `docker run -it --name my-container <image> bash` ,
-2. Container kotogula active ase koto gula ase eigula dekhar command : 
-    - `docker run <image>` ,
-    - `docker run -it <image> bash` ,
-    - `docker run -d <image>`  (detatch mode),
-    - `docker run -it --name my-container <image> bash`
+    - 1. Build kora image Run korbo (Container banano) : 
+            - `docker run <image>`  ,
+            - or `docker run -it <image> bash`
+            - or `docker run -it --name my-container <image> bash` ,
+    - 2. Container kotogula active ase koto gula ase eigula dekhar command : 
+            - `docker run <image>` ,
+            - `docker run -it <image_id> bash` or ,
+            - `docker run -it <image_name> bash` ,
+            - `docker run -d <image>`  (detatch mode),
+            - `docker run -it --name my-container <image> bash`
 
 Step-3 
 
