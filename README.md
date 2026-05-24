@@ -24,6 +24,7 @@ Step-2 (Container build from image):
 
 Step-3 (Container der ke same network e niye asha)
     - 1. Bridge Network 
+    
             - `docker network ls`
             - `docker run -d it --name ubuntu_container1 ubuntu`
             - `docker run -d it --name ubuntu_container2 ubuntu`
