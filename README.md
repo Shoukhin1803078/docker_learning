@@ -11,7 +11,7 @@ Step-1 (Image Building):
 
 Step-2 (Container build from image):
 
-    - 1. Build kora image Run korbo (Container banano) : 
+    - 1. Build kora image Run korbo orthat Container bananbo (running image ke container bole) : 
             - `docker run <image>`  ,
             - or `docker run -it <image> bash`
             - or `docker run -it --name my-container <image> bash` ,
@@ -22,7 +22,41 @@ Step-2 (Container build from image):
             - `docker run -d <image>`  (detatch mode),
             - `docker run -it --name my-container <image> bash`
 
-Step-3 
+Step-3 (Container der ke same network e niye asha)
+    - 1. Bridge Network 
+            - `docker network ls`
+            - `docker run -d it --name ubuntu_container1 ubuntu`
+            - `docker run -d it --name ubuntu_container2 ubuntu`
+            - `docker ps`
+            - `docker network inspect bridge`
+            - `docker exec -it ubuntu_container1 bash`
+            - `ping ubuntu_container2`
+            - `apt update`
+            - `apt install iputils-ping`
+            - `ping ubuntu_container2`
+
+    - 2. Custom Docker Network তৈরি করা
+            - `docker network create my-network`
+            - `docker network ls`
+            - `docker run -dit --name container1 --network my-network ubuntu`
+            - `docker run -dit --name container2 --network my-network ubuntu`
+            - `docker exec -it container1 bash`
+            - `ping container2`
+            - `docker network inspect my-network`
+
+
+
+
+
+            - `docker network connect my-network container1`
+            - `docker network disconnect my-network container1`
+            - `docker inspect container1`
+            - `docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container1`
+
+Step-4
+
+
+
 
 # 🐳 Docker Quick Cheatsheet (Bangla - Developer Friendly)
 
