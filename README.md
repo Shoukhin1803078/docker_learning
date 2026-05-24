@@ -1,6 +1,172 @@
 # docker_learning
 
-currently i have learn a docker playlist from a tutor. i have already learn these topic:
+MySelf Steps:
+
+Step-1 (Image Building): 
+
+1. Docker Images check korlam: `docker images`
+2. Dockerfile likhe Image build korbo (Image banano):  `docker build -t <name> .` 
+
+Step-2 (Container build from image):
+
+1. Build kora image Run korbo (Container banano) : 
+    - `docker run <image>`  ,
+    - or `docker run -it <image> bash`
+    - or `docker run -it --name my-container <image> bash` ,
+2. Container kotogula active ase koto gula ase eigula dekhar command : 
+    - `docker run <image>` ,
+    - `docker run -it <image> bash` ,
+    - `docker run -d <image>`  (detatch mode),
+    - `docker run -it --name my-container <image> bash`
+
+Step-3 
+
+# 🐳 Docker Quick Cheatsheet (Bangla - Developer Friendly)
+
+---
+
+## 📦 Image Management (Step-1)
+
+```python
+docker pull <image>             # image download
+docker images                   # সব image list
+docker rmi <image_id>           # image delete
+docker image prune              # unused image clean
+docker build -t <name> .        # Dockerfile থেকে image build
+docker tag <image> <repo:tag>   # image tag করা
+docker push <repo:tag>          # Docker Hub এ push
+```
+
+---
+
+## 🚀 Container Run (Step-2)
+
+```python
+docker run <image>                         # simple run
+docker run -it <image> bash                # interactive mode
+docker run -d <image>                      # background run
+docker run -d -p 8080:80 <image>           # port mapping
+docker run -it --name my-container <image> bash   # named container
+docker run -v $(pwd):/app <image>          # volume mount
+docker run --rm <image>                    # stop হলে auto delete
+```
+
+---
+
+## 📋 Container Management
+
+```python
+docker ps                  # running container
+docker ps -a               # all container
+docker start <id>          # container start
+docker stop <id>           # container stop
+docker restart <id>        # restart container
+docker rm <id>             # delete container
+docker rm -f <id>          # force delete
+docker rename <old> <new>  # container rename
+```
+
+---
+
+## 🔍 Container Access & Debug
+
+```python
+docker exec -it <id> bash    # running container-এ ঢোকা
+docker logs <id>             # logs দেখা
+docker logs -f <id>          # live logs
+docker inspect <id>          # full details (JSON)
+docker top <id>              # running process
+```
+
+---
+
+## 💾 Volume Management
+
+```python
+docker volume create <name>          # volume create
+docker volume ls                     # volume list
+docker volume inspect <name>         # details
+docker volume rm <name>              # delete volume
+docker run -v <name>:/data <image>   # volume attach
+```
+
+---
+
+## 🌐 Network Management
+
+```python
+docker network ls                     # network list
+docker network create <name>          # create network
+docker network inspect <name>         # details
+docker network rm <name>              # delete network
+docker run --network <name> <image>   # network use
+```
+
+---
+
+## 🧹 Cleanup Commands
+
+```python
+docker stop $(docker ps -q)        # সব running container stop
+docker rm $(docker ps -aq)         # সব container delete
+docker rmi $(docker images -q)     # সব image delete
+docker system prune -a             # সব unused clean
+```
+
+---
+
+## 📤 Docker Hub
+
+```python
+docker login                 # login
+docker logout                # logout
+docker push <repo:tag>       # push image
+docker pull <repo:tag>       # pull image
+```
+
+---
+
+## ⚡ Useful Shortcuts (VERY COMMON 🔥)
+
+```python
+docker ps -aq                 # সব container ID
+docker images -q              # সব image ID
+docker stop $(docker ps -q)   # সব stop
+docker rm -f $(docker ps -aq) # সব force delete
+```
+
+---
+
+## 🧠 DevOps Real Workflow (Must Remember)
+
+```
+docker build -t my-app .
+docker run -d -p 8080:80 my-app
+docker ps
+docker logs -f <id>
+docker exec -it <id> bash
+```
+
+---
+
+## 🎯 Ultra Quick Summary (Top 10 🔥)
+
+```
+docker run -it ubuntu bash
+docker ps -a
+docker start -ai <id>
+docker exec -it <id> bash
+docker logs -f <id>
+docker build -t my-app .
+docker run -d -p 8080:80 my-app
+docker rm -f <id>
+docker system prune -a
+docker images
+```
+
+# Course Module:
+
+```markdown
 - Lec-1: Docker কি? কেন শিখবো Docker? – Complete Intro in Bangla
 - Lec-2: Docker File vs Docker Image vs Docker Container
 - Lec-3: Docker ইনস্টলেশন - Docker Desktop on Mac
@@ -27,6 +193,9 @@ Now My remaining topics are these:
 - Lec-21: Docker Security Best Practices – Container নিরাপদ রাখুন
 - Lec-22: Top 10 Docker Commands প্রতিদিনের কাজে লাগবে
 - Lec-23: Docker Interview Questions – চাকরির জন্য প্রস্তুতি
+```
+
+
 
 
 ---

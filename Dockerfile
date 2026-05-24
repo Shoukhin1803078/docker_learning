@@ -1,6 +1,6 @@
 From python:3.11-slim
 WORKDIR /app
-COPY requirements.txt .               # requirements.txt file copy kore container er app/ ('.' dot mane holo directory) ei directory te paste koro
+COPY requirements.txt .                             # Copy the requirements.txt file from the current directory to the working directory in the container
 RUN pip install -r requirements.txt 
-COPY . .                              #  eikhane frist dot mane holo host machine er directory /Users/mdalamintokder/docker_learning theke sob kisu copy kore  — container er app/ ei directory te paste koro
+COPY . .                                            # Copy all files from the current directory to the working directory in the container
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]  
