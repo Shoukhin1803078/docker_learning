@@ -1,4 +1,11 @@
 # Lec-9: **Docker Compose শিখুন – Multiple Containers সহজে Run করুন**
+#------------------------------------ChatGPT--------------------------#
+
+
+
+
+
+
 
 একাধিক Container (API, Database, Cache) আলাদা আলাদা `docker run` দিয়ে চালানো কষ্টকর। **Docker Compose** একটি YAML ফাইল (`docker-compose.yml`) দিয়ে সব সার্ভিস একসাথে define এবং run করতে দেয়।
 

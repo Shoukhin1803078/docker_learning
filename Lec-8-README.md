@@ -18,7 +18,7 @@ Docker এ একাধিক Container একসাথে কাজ করা�
 
 ---
 
-## Docker Network কী?
+# Docker Network কী?
 
 Docker Network হলো এমন একটি virtual network যেখানে multiple containers একে অপরের সাথে connect হতে পারে।
 
@@ -43,14 +43,14 @@ Docker Network হলো এমন একটি virtual network যেখান�
 
 ---
 
-## Docker এর Default Networks
+### Docker এর Default Networks
 
 Docker automatically কিছু network তৈরি করে।
 
 সব network দেখতে:
 
 ```
-docker networkls
+docker network ls
 ```
 
 Example output:
@@ -66,7 +66,7 @@ xxxxxx         none      null      local
 
 # Docker Network Types
 
-## 1. Bridge Network (সবচেয়ে common)
+### 1. Bridge Network (সবচেয়ে common)
 
 Default network type।
 
@@ -76,7 +76,7 @@ Default network type।
 
 ---
 
-## 2. Host Network
+### 2. Host Network
 
 Container directly host machine এর network use করে।
 
@@ -84,7 +84,7 @@ Linux এ বেশি use হয়।
 
 ---
 
-## 3. None Network
+### 3. None Network
 
 Container এর কোনো network থাকবে না।
 
@@ -92,20 +92,20 @@ Completely isolated।
 
 ---
 
-# Bridge Network কিভাবে কাজ করে?
+## Bridge Network কিভাবে কাজ করে?
 
 চলুন practical example দেখি।
 
 ---
 
-# Step-1: দুইটা Ubuntu Container Run করি
+### Step-1: দুইটা Ubuntu Container Run করি
 
 ```
-docker run-dit--name ubuntu1 ubuntu
+docker run -d it --name ubuntu_container1 ubuntu    # eita basically "docker run ubuntu"
 ```
 
 ```
-docker run-dit--name ubuntu2 ubuntu
+docker run -d it --name ubuntu_container2 ubuntu
 ```
 
 Explanation:
@@ -116,15 +116,15 @@ Explanation:
 
 ---
 
-# Step-2: Running Containers দেখুন
+### Step-2: Running Containers দেখুন
 
 ```
-dockerps
+docker ps
 ```
 
 ---
 
-# Step-3: Network Inspect করি
+### Step-3: Network Inspect করি
 
 ```
 docker network inspect bridge
@@ -134,18 +134,18 @@ docker network inspect bridge
 
 ---
 
-# Step-4: এক Container থেকে আরেক Container এ Ping করি
+### Step-4: এক Container থেকে আরেক Container এ Ping করি
 
 প্রথম container এ ঢুকুন:
 
 ```
-docker exec-it ubuntu1bash
+docker exec -it ubuntu_container1 bash
 ```
 
 এখন দ্বিতীয় container কে ping দিন:
 
 ```
-ping ubuntu2
+ping ubuntu_container2
 ```
 
 কিছু Ubuntu image এ ping install করা থাকে না।
@@ -160,7 +160,7 @@ apt install iputils-ping
 তারপর:
 
 ```
-ping ubuntu2
+ping ubuntu_container2
 ```
 
 যদি reply আসে তাহলে বুঝবেন containers successfully communicate করছে।
@@ -176,10 +176,10 @@ Docker network এর সবচেয়ে cool feature:
 যেমন:
 
 ```
-ping ubuntu2
+ping ubuntu_container2
 ```
 
-এখানে `ubuntu2` automatically hostname হিসেবে কাজ করছে।
+এখানে `ubuntu_container2` automatically hostname হিসেবে কাজ করছে।
 
 Real project এ এটা huge সুবিধা দেয়।
 
@@ -213,7 +213,7 @@ docker network create my-network
 ## Step-2: Network List দেখুন
 
 ```
-docker networkls
+docker network ls
 ```
 
 এখন `my-network` দেখতে পাবেন।
@@ -223,11 +223,11 @@ docker networkls
 # Container কে Custom Network এ Run করা
 
 ```
-docker run-dit--name container1--network my-network ubuntu
+docker run -dit --name container1 --network my-network ubuntu
 ```
 
 ```
-docker run-dit--name container2--network my-network ubuntu
+docker run -dit --name container2 --network my-network ubuntu
 ```
 
 ---
@@ -237,7 +237,7 @@ docker run-dit--name container2--network my-network ubuntu
 প্রথম container এ ঢুকুন:
 
 ```
-docker exec-it container1bash
+docker exec -it container1 bash
 ```
 
 Ping দিন:
@@ -298,7 +298,7 @@ docker inspect container1
 Specific IP দেখতে:
 
 ```
-docker inspect-f'{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container1
+docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container1
 ```
 
 ---
@@ -338,7 +338,7 @@ Container name দিয়েই connection হচ্ছে।
 ## সব network দেখুন
 
 ```
-docker networkls
+docker network ls
 ```
 
 ---
@@ -362,7 +362,7 @@ docker network inspect my-network
 ## Network delete করুন
 
 ```
-docker networkrm my-network
+docker network rm my-network
 ```
 
 ---
@@ -400,10 +400,10 @@ docker network create app-network
 ## Step-2: MySQL Container Run
 
 ```
-docker run-d \
+docker run -d \
 --name mysql-db \
 --network app-network \
--eMYSQL_ROOT_PASSWORD=root \
+-e MYSQL_ROOT_PASSWORD=root \
 mysql
 ```
 
@@ -412,10 +412,10 @@ mysql
 ## Step-3: Ubuntu Container Run
 
 ```
-docker run-it \
+docker run -it \
 --name app-container \
 --network app-network \
-ubuntubash
+ubuntu bash
 ```
 
 ---
@@ -455,41 +455,27 @@ Communication successful হলে বুঝবেন:
 
 # Interview Questions
 
-## Question-1:
+Question-1: Docker network কেন দরকার?
 
-Docker network কেন দরকার?
-
-### Answer:
-
-Multiple containers এর মধ্যে communication enable করার জন্য Docker network ব্যবহার করা হয়।
+Answer: Multiple containers এর মধ্যে communication enable করার জন্য Docker network ব্যবহার করা হয়।
 
 ---
 
-## Question-2:
+Question-2: Default Docker network type কী
 
-Default Docker network type কী?
-
-### Answer:
-
-Bridge network।
+Answer: Bridge network।
 
 ---
 
-## Question-3:
+Question-3: Container name দিয়ে communication possible কেন?
 
-Container name দিয়ে communication possible কেন?
-
-### Answer:
-
-Docker internal DNS provide করে।
+Answer: Docker internal DNS provide করে।
 
 ---
 
-## Question-4:
+Question-4: Custom network use করার benefit কী?
 
-Custom network use করার benefit কী?
-
-### Answer:
+Answer:
 
 - Better isolation
 - Better security
@@ -500,9 +486,7 @@ Custom network use করার benefit কী?
 
 # Homework 🔥
 
-## Task-1
-
-একটি custom network তৈরি করুন:
+#### Task-1 : একটি custom network তৈরি করুন:
 
 ```
 docker network create practice-network
@@ -510,28 +494,21 @@ docker network create practice-network
 
 ---
 
-## Task-2
-
-দুইটা Ubuntu container run করুন একই network এ।
+#### Task-2 : দুইটা Ubuntu container run করুন একই network এ।
 
 ---
 
-## Task-3
-
-এক container থেকে অন্য container কে ping দিন।
+#### Task-3:  এক container থেকে অন্য container কে ping দিন।
 
 ---
 
-## Task-4
-
-`docker network inspect` ব্যবহার করে IP address দেখুন।
+#### Task-4 :  `docker network inspect` ব্যবহার করে IP address দেখুন।
 
 ---
 
 # Lec-8 Summary
 
 আজকে আপনি শিখলেন:
-
 ✅ Docker Network কী
 ✅ Bridge network
 ✅ Custom network
@@ -540,7 +517,6 @@ docker network create practice-network
 ✅ Network inspect
 ✅ Connect/disconnect container
 ✅ Real project communication flow
-
 
 ---
 
